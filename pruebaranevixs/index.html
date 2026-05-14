@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        /* CONTENEDOR ESTILO PROSIP: Limita el espacio y evita que el modelo se expanda o deforme */
         body, html { 
             margin: 0; 
             padding: 0; 
@@ -18,7 +17,6 @@
             align-items: center;
         }
 
-        /* Forzamos a que el visor mantenga la proporción estricta del dispositivo móvil */
         model-viewer { 
             width: 100vw; 
             height: 100vh; 
@@ -27,7 +25,6 @@
             --poster-color: transparent; 
         }
 
-        /* Botón personalizado flotante */
         #ar-button {
             background-image: url(https://modelviewer.dev/shared-assets/icons/ar_icon.png);
             background-repeat: no-repeat;
@@ -51,20 +48,20 @@
             z-index: 9999;
             cursor: pointer;
             box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
     <model-viewer 
-        src="untitled_optimized.glb" 
+        src="untitled_optimized.glb"
+        ios-src="untitled_optimized.usdz" 
         ar 
-        ar-modes="webxr" 
+        ar-modes="scene-viewer webxr" 
         ar-scale="fixed"
         ar-placement="floor"
-        shadow-intensity="1.5"
-        shadow-softness="0.8"
+        shadow-intensity="2"
+        shadow-softness="0.3"
         exposure="1.2"
         interaction-prompt="none"
         camera-controls>
