@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* Estilos para que el visor ocupe toda la pantalla del móvil */
         body, html { 
             margin: 0; 
             padding: 0; 
@@ -21,7 +20,6 @@
             --poster-color: transparent; 
         }
 
-        /* Diseño del botón AR optimizado para que no choque con la navegación del celular */
         #ar-button {
             background-image: url(https://modelviewer.dev/shared-assets/icons/ar_icon.png);
             background-repeat: no-repeat;
@@ -31,10 +29,9 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            /* Posición elevada a 120px para evitar barras del sistema */
             bottom: 120px; 
             padding: 0px 16px 0px 40px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: sans-serif;
             font-size: 14px;
             font-weight: bold;
             color: #4285f4;
@@ -47,18 +44,15 @@
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-
-        #ar-button:active { background-color: #f1f3f4; }
     </style>
 </head>
 <body>
 
     <!-- 
-        VISOR OPTIMIZADO:
-        - src: Nombre de tu archivo .glb
-        - ar-scale="fixed": Mantiene la escala 1:1 arquitectónica.
-        - bounds="tight": Evita que el modelo desaparezca al ajustar la cámara a sus límites.
-        - exposure="1": Mejora la iluminación de los materiales.
+        MODIFICACIÓN DE ESCALA:
+        Si el modelo se mueve mucho o es muy grande/pequeño, 
+        cambia los valores en scale="1 1 1". 
+        Ejemplo: "0.5 0.5 0.5" para la mitad de tamaño, o "10 10 10" para 10 veces más grande.
     -->
     <model-viewer 
         src="untitled_optimized.glb" 
@@ -71,8 +65,7 @@
         shadow-intensity="1" 
         exposure="1"
         bounds="tight"
-        min-camera-orbit="auto auto auto"
-        max-camera-orbit="auto auto auto"
+        scale="1 1 1"
         interaction-prompt="auto">
         
         <button slot="ar-button" id="ar-button">
@@ -81,7 +74,6 @@
 
     </model-viewer>
 
-    <!-- Script oficial de Model Viewer (Versión estable 3.4.0) -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </body>
 </html>
