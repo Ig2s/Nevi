@@ -48,22 +48,18 @@
 </head>
 <body>
 
-    <!-- 
-        MODIFICACIÓN DE ESCALA:
-        Si el modelo se mueve mucho o es muy grande/pequeño, 
-        cambia los valores en scale="1 1 1". 
-        Ejemplo: "0.5 0.5 0.5" para la mitad de tamaño, o "10 10 10" para 10 veces más grande.
-    -->
     <model-viewer 
         src="untitled_optimized.glb" 
         ar 
-        ar-modes="webxr scene-viewer quick-look" 
+        ar-modes="webxr" 
         ar-scale="fixed"
         ar-placement="floor"
+        update-rate="60"
         camera-controls 
         auto-rotate
-        shadow-intensity="1" 
-        exposure="1"
+        shadow-intensity="1.5" 
+        shadow-softness="1"
+        exposure="1.2"
         bounds="tight"
         scale="1 1 1"
         interaction-prompt="auto">
