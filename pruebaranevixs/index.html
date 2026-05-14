@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        /* CONTENEDOR ESTILO PROSIP: Mantiene el visor hermético y centrado en la pantalla */
         body, html { 
             margin: 0; 
             padding: 0; 
@@ -18,7 +17,6 @@
             align-items: center;
         }
 
-        /* Fuerza a la escena 3D a ocupar el espacio del dispositivo móvil sin desbordarse */
         model-viewer { 
             width: 100vw; 
             height: 100vh; 
@@ -27,7 +25,6 @@
             --poster-color: transparent; 
         }
 
-        /* Botón de Realidad Aumentada interactivo y profesional */
         #ar-button {
             background-image: url(https://modelviewer.dev/shared-assets/icons/ar_icon.png);
             background-repeat: no-repeat;
@@ -51,35 +48,53 @@
             z-index: 9999;
             cursor: pointer;
             box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
     <model-viewer 
+        id="visor-arquitectura"
         src="untitled_optimized.glb"
-        ios-src="untitled_optimized.usdz" 
         ar 
-        ar-modes="scene-viewer webxr quick-look" 
+        ar-modes="scene-viewer" 
         ar-scale="fixed"
         ar-placement="floor"
-        shadow-intensity="1.5"
-        shadow-softness="0.5"
+        shadow-intensity="2"
+        shadow-softness="0.2"
         exposure="1.2"
         interaction-prompt="none"
         camera-controls>
         
         <button slot="ar-button" id="ar-button">
-            VER CABAÑA EN TAMAÑO REAL (1:1)
+            VER CABAÑA EN TAMAÑO REAL 1:1
         </button>
 
     </model-viewer>
 
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-    
-    <script nomodule src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer-legacy.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const viewer = document.querySelector('#visor-arquitectura');
+            const button = document.querySelector('#ar-button');
 
-    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+            button.addEventListener('click', () => {
+                // Generamos la URL absoluta del archivo en GitHub Pages
+                const modelUrl = new URL(viewer.src, window.location.href).href;
+                
+                /*
+                  EL TRUCO TÉCNICO COMPLETO:
+                  Inyectamos '&resizable=false' para que Scene Viewer deshabilite los dedos del usuario.
+                  Inyectamos '&disable_scaling=1' para apagar el algoritmo de Google que achica la arquitectura.
+                */
+                const sceneViewerUrl = `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(modelUrl)}&mode=ar_only&resizable=false&disable_scaling=1#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
+                
+                // Forzamos al sistema operativo a saltar directamente al motor calibrado
+                window.location.href = sceneViewerUrl;
+            });
+        });
+    </script>
+
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <script nomodule src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer-legacy.js"></script>
 </body>
 </html>
