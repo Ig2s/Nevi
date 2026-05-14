@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Experiencia AR Nevi - Guillermo Gomez</title>
+    <title>Visor AR Profesional - Guillermo Gomez</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        /* 1. CONTENEDOR BASE (Estilo PROSIP para evitar expansión infinita) */
+        /* CONTENEDOR ESTILO PROSIP: Limita el espacio y evita que el modelo se expanda o deforme */
         body, html { 
             margin: 0; 
             padding: 0; 
@@ -14,44 +14,67 @@
             overflow: hidden; 
             background-color: #ffffff;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
 
-        /* 2. CAJA LIMITADORA DE INTERFAZ (Evita que el visor colapse los controles del móvil) */
-        .sketchfab-embed-wrapper {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
+        /* Forzamos a que el visor mantenga la proporción estricta del dispositivo móvil */
+        model-viewer { 
+            width: 100vw; 
+            height: 100vh; 
             max-width: 100%;
             max-height: 100%;
-            box-sizing: border-box;
+            --poster-color: transparent; 
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
+        /* Botón personalizado flotante */
+        #ar-button {
+            background-image: url(https://modelviewer.dev/shared-assets/icons/ar_icon.png);
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-position: 12px 50%;
+            background-color: #ffffff;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 70px; 
+            padding: 0px 24px 0px 48px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #4285f4;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 25px;
+            border: 2px solid #4285f4;
+            display: block !important;
+            z-index: 9999;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
-    <div class="sketchfab-embed-wrapper">
-        <iframe 
-            title="Cabaña Nevi XS" 
-            allowfullscreen 
-            mozallowfullscreen="true" 
-            webkitallowfullscreen="true" 
-            allow="autoplay; fullscreen; xr-spatial-tracking" 
-            xr-spatial-tracking 
-            execution-while-out-of-viewport 
-            execution-while-not-rendered 
-            src="https://sketchfab.com/models/3dc167c4b5644998b164474271bcb67a/embed?cardboards=0&preload=1&ar=1&ar_features=1&ar_modes=quicklook">
-        </iframe>
-    </div>
+    <model-viewer 
+        src="untitled_optimized.glb" 
+        ar 
+        ar-modes="webxr" 
+        ar-scale="fixed"
+        ar-placement="floor"
+        shadow-intensity="1.5"
+        shadow-softness="0.8"
+        exposure="1.2"
+        interaction-prompt="none"
+        camera-controls>
+        
+        <button slot="ar-button" id="ar-button">
+            VER CABAÑA EN TAMAÑO REAL (1:1)
+        </button>
 
+    </model-viewer>
+
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </body>
 </html>
