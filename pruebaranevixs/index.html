@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
+        /* CONTENEDOR ESTILO PROSIP: Mantiene el visor hermético y centrado en la pantalla */
         body, html { 
             margin: 0; 
             padding: 0; 
@@ -17,6 +18,7 @@
             align-items: center;
         }
 
+        /* Fuerza a la escena 3D a ocupar el espacio del dispositivo móvil sin desbordarse */
         model-viewer { 
             width: 100vw; 
             height: 100vh; 
@@ -25,6 +27,7 @@
             --poster-color: transparent; 
         }
 
+        /* Botón de Realidad Aumentada interactivo y profesional */
         #ar-button {
             background-image: url(https://modelviewer.dev/shared-assets/icons/ar_icon.png);
             background-repeat: no-repeat;
@@ -48,6 +51,7 @@
             z-index: 9999;
             cursor: pointer;
             box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -57,11 +61,11 @@
         src="untitled_optimized.glb"
         ios-src="untitled_optimized.usdz" 
         ar 
-        ar-modes="scene-viewer webxr" 
+        ar-modes="scene-viewer webxr quick-look" 
         ar-scale="fixed"
         ar-placement="floor"
-        shadow-intensity="2"
-        shadow-softness="0.3"
+        shadow-intensity="1.5"
+        shadow-softness="0.5"
         exposure="1.2"
         interaction-prompt="none"
         camera-controls>
@@ -73,5 +77,9 @@
     </model-viewer>
 
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    
+    <script nomodule src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer-legacy.js"></script>
+
+    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
 </body>
 </html>
